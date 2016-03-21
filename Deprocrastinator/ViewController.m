@@ -8,11 +8,13 @@
 
 #import "ViewController.h"
 
-@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property NSMutableArray *toDoText;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSArray *tapColors;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
+
 @end
 
 @implementation ViewController
@@ -27,12 +29,19 @@
     
 }
 
+- (IBAction)onSwipe:(UISwipeGestureRecognizer *)sender {
+    CGPoint location = [sender locationInView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor greenColor];
+}
+
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
     cell.textLabel.text = [NSString stringWithFormat:@"%@", self.textField.text];
     cell.textLabel.text = [self.toDoText objectAtIndex:indexPath.row];
-//
-//    [tableView setEditing:YES animated:YES];
     
     return cell;
 }
@@ -45,6 +54,18 @@
     [self.toDoText addObject:self.textField.text];
     [self.tableView reloadData];
     self.textField.text = @"";
+
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    
+        if ([self.textField.text isEqualToString:@""]) {
+            [self.addButton setEnabled:NO];
+ } else if (![self.textField.text isEqualToString:@""]) {
+            [self.addButton setEnabled:YES];
+     }
+    
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -54,30 +75,23 @@
 }
 
 - (IBAction)editButtonClick:(UIBarButtonItem *)sender {
-
-
-
+    
+    
+    
     if ([self.tableView isEditing] == NO){
         [sender setTitle:@"Done"];
         NSLog(@"%@", self.editButtonItem.title);
         [self.tableView setEditing:YES animated:YES];
     }else if ([self.tableView isEditing] == YES){
-       [sender setTitle:@"Edit"];
+        [sender setTitle:@"Edit"];
         NSLog(@"%@", self.editButtonItem.title);
-       [self.tableView setEditing:NO animated:YES];
+        [self.tableView setEditing:NO animated:YES];
     }
+    
+    
+    
+    
 }
-
-
-//    self.toggle = !self.toggle;
-//    if ([self.whichPlayerLabel.text isEqual: @"Player One - Go!"]) {
-//        self.whichPlayerLabel.text = @"Player Two - Go!";
-//    } else {
-//        self.whichPlayerLabel.text = @"Player One - Go!";
-//    }
-
-
-
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete)
@@ -86,8 +100,6 @@
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     } 
 }
-
-
 
 
 @end

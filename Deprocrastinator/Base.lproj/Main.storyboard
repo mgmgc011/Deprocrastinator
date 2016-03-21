@@ -45,6 +45,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="ESn-sb-Znj" appends="YES" id="8pv-B7-aZm"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <variation key="widthClass=compact" fixedFrame="YES">
@@ -80,11 +84,18 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="EkR-CA-l5y" id="WQf-r2-SGa"/>
                         <outlet property="tableView" destination="Xei-0D-O4b" id="w0C-ii-Ufv"/>
                         <outlet property="textField" destination="wXv-Mj-id1" id="UeU-uX-mwB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="ESn-sb-Znj">
+                    <connections>
+                        <action selector="onSwipe:" destination="BYZ-38-t0r" id="baU-8f-qeI"/>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="4oE-6o-kiJ"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1375.5" y="387"/>
         </scene>
