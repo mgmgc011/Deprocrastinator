@@ -73,7 +73,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="To Do" id="wVr-Iu-nDC">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="31N-Po-tLy">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="31N-Po-tLy">
                             <connections>
                                 <action selector="editButtonClick:" destination="BYZ-38-t0r" id="Hey-7K-izq"/>
                             </connections>

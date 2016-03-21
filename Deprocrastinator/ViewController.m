@@ -53,16 +53,16 @@
     cell.textLabel.textColor = [UIColor greenColor];
 }
 
-- (IBAction)editButtonClick:(id)sender {
+- (IBAction)editButtonClick:(UIBarButtonItem *)sender {
 
 
 
     if ([self.tableView isEditing] == NO){
-        [self.editButtonItem setTitle:@"Done"];
+        [sender setTitle:@"Done"];
         NSLog(@"%@", self.editButtonItem.title);
         [self.tableView setEditing:YES animated:YES];
     }else if ([self.tableView isEditing] == YES){
-       [self.editButtonItem setTitle:@"Edit"];
+       [sender setTitle:@"Edit"];
         NSLog(@"%@", self.editButtonItem.title);
        [self.tableView setEditing:NO animated:YES];
     }
