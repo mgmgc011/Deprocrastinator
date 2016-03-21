@@ -23,7 +23,6 @@
     
     self.tapColors = [NSArray arrayWithObjects:[UIColor redColor], [UIColor yellowColor], [UIColor greenColor], nil];
     
-//    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     
 }
@@ -55,17 +54,40 @@
 }
 
 - (IBAction)editButtonClick:(id)sender {
+
+
+
     if ([self.tableView isEditing] == NO){
         [self.editButtonItem setTitle:@"Done"];
+        NSLog(@"%@", self.editButtonItem.title);
         [self.tableView setEditing:YES animated:YES];
-   }else {
+    }else if ([self.tableView isEditing] == YES){
        [self.editButtonItem setTitle:@"Edit"];
-       [self.tableView setEditing:NO animated:NO];
-       
+        NSLog(@"%@", self.editButtonItem.title);
+       [self.tableView setEditing:NO animated:YES];
     }
-
-    
 }
-- Tableview
+
+
+//    self.toggle = !self.toggle;
+//    if ([self.whichPlayerLabel.text isEqual: @"Player One - Go!"]) {
+//        self.whichPlayerLabel.text = @"Player Two - Go!";
+//    } else {
+//        self.whichPlayerLabel.text = @"Player One - Go!";
+//    }
+
+
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [self.toDoText removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    } 
+}
+
+
+
 
 @end
