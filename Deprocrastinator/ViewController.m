@@ -8,7 +8,10 @@
 
 #import "ViewController.h"
 
-@interface ViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property NSMutableArray *toDoText;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -16,20 +19,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.toDoText = [NSMutableArray arrayWithObjects:[UIColor redColor], [UIColor blueColor], nil];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
-    cell.textLabel.text = [NSString stringWithFormat:@"Row %li", indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", self.textField.text];
+    cell.textLabel.text = [self.toDoText objectAtIndex:indexPath.row];
     
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return self.toDoText.count;
 }
+
 - (IBAction)onAddButtonPressed:(UIButton *)sender {
-    
+    [self.toDoText addObject:self.textField.text];
+    [self.tableView reloadData];
+//    = [NSString stringWithFormat:@"%@", self.textField.text];
 }
 
 @end
