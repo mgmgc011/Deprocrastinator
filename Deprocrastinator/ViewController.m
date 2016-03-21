@@ -20,11 +20,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
+    cell.textLabel.text = [NSString stringWithFormat:@"Row %li", indexPath.row];
+    
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return 4;
 }
 - (IBAction)onAddButtonPressed:(UIButton *)sender {
     
